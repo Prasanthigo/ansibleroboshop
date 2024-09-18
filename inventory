@@ -1,5 +1,5 @@
 [mongodb]
-roboshop-us-dev-mongodb-01.hetvik.online
+172.31.75.15
 [mysql]
 roboshop-us-dev-db-mysql-01.hetvik.online
 roboshop-us-dev-db-mysql-02.hetvik.online
