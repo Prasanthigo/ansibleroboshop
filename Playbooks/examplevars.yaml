@@ -1,0 +1,10 @@
+---
+- name: vars
+  hosts: mongodb
+  vars: 
+   course: Devops
+   trainer: siva
+  tasks:
+  - name: printing vars
+    ansible.builtin.debug:
+     msg: "I am learning {{course}} and trainer is {{trainer}}"
