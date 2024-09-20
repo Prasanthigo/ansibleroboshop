@@ -1,0 +1,15 @@
+---
+- name: vars from tasks
+  hosts: mongodb
+  vars:
+   owner: "siva"
+   land: "100 hectors"
+  tasks:
+  - name: vars from play
+    ansible.builtin.debug:
+     msg: "owner is {{owner}}, land is {{land}}"
+  - name: vars from tasks
+    vars:
+    - owner: "Prasanthi"
+    ansible.builtin.debug:
+     msg: "owner is {{owner}}, land is {{land}}"
