@@ -1,5 +1,5 @@
 [mongodb]
-172.31.67.75
+roboshop.hetvik.online
 [mongodb:vars]
 username=prasanthi
 env=dev
