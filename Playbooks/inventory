@@ -1,5 +1,8 @@
 [mongodb]
 172.31.67.75
+[mongodb:vars]
+username=prasanthi
+env=dev
 [mysql]
 roboshop-us-dev-db-mysql-01.hetvik.online
 roboshop-us-dev-db-mysql-02.hetvik.online

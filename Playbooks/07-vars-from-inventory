@@ -1,0 +1,7 @@
+---
+- name: vars from inventory
+  hosts: mongodb
+  tasks:
+  - name: vars from inventory
+    ansible.builtin.debug:
+     msg: "username is {{username}} and env is {{env}}"
