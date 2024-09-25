@@ -6,6 +6,6 @@
   tasks:
   - name: print if the user name is Devops
     ansible.builtin.debug:
-     msg: Hello "{{Name}}"
-    when: Name == DevOps
+     msg: "Hello {{Name}}"
+    when: Name == "DevOps"
     
