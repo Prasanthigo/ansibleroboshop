@@ -1,0 +1,11 @@
+---
+- name: print user if the user name is Devops
+  hosts: mongodb
+  vars:
+   Name: DevOps
+  tasks:
+  - name: print if the user name is Devops
+    ansible.builtin.debug:
+     msg: Hello "{{Name}}"
+    when: Name == DevOps
+    
