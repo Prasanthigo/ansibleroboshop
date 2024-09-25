@@ -1,0 +1,16 @@
+---
+- name: create username
+  hosts: mongodb
+  tasks: 
+  - name: check roboshop user exists or not
+    ansible.builtin.command: id roboshop
+    register: output
+  - name: print output
+    ansible.builtin.debug:
+     msg: "{{output}}"
+  - name: print exit status
+    ansible.builtin.debug:
+     msg: "{{output.rc}}"
+  - name: create user
+    ansible.builtin.user:
+     name: roboshop
