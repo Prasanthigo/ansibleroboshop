@@ -19,7 +19,7 @@
     ansible.builtin.debug:
      msg: "output is: {{out}}"
 
-  - when: out.rc!=0
+  - when: out.rc != 0
     name: create user roboshop
     ansible.builtin.user:
      name: roboshop
@@ -32,7 +32,7 @@
   - name: print the directory status
     ansible.builtin.debug:
       msg: "stats are: {{directory}}"
-  - when: directory.stat.exists == 'False'
+  - when: directory.stat.exists == False
     name: create directory
     ansible.builtin.file:
      path: /app
