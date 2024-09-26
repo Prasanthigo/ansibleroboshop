@@ -9,4 +9,4 @@
      state: latest
     loop:
     - nginx
-    - postmap
+    - postfix
