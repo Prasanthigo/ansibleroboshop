@@ -3,6 +3,8 @@ mongodb.hetvik.online
 [mongodb:vars]
 username=prasanthi
 env=dev
+[catalogue]
+catalogue.hetvik.online
 [mysql]
 roboshop-us-dev-db-mysql-01.hetvik.online
 roboshop-us-dev-db-mysql-02.hetvik.online
