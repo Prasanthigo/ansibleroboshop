@@ -6,8 +6,13 @@
   - name: install nginx
     ansible.builtin.yum:
      name: nginx
-     enabled: yes
      state: installed
+  - name: Enable and start nginx service
+    ansible.builtin.systemd:
+     name: nginx
+     enabled: yes
+     state: started
+
   - name: remove html directory
     ansible.builtin.file:
      path: /usr/share/nginx/html
