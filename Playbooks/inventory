@@ -5,6 +5,8 @@ username=prasanthi
 env=dev
 [web]
 web.hetvik.online
+[redis]
+redis.hetvik.online
 [catalogue]
 catalogue.hetvik.online
 [mysql]
