@@ -3,6 +3,8 @@ mongodb.hetvik.online
 [mongodb:vars]
 username=prasanthi
 env=dev
+[web]
+web.hetvik.online
 [catalogue]
 catalogue.hetvik.online
 [mysql]
