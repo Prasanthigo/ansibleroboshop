@@ -74,8 +74,13 @@
      name: mongodb-org-shell
      state: installed
 
-  - name: Install dependencies
-    ansible.builtin.command: mongo --host mongodb.hetvik.online < /app/schema/catalogue.js
+  - name: load MongoDB schema
+    ansible.builtin.shell: mongo --host mongodb.hetvik.online < /app/schema/catalogue.js
+    args:
+     executable: /bin/bash  # Ensures correct execution in shell
+
+  # - name: Install dependencies
+  #   ansible.builtin.command: mongo --host mongodb.hetvik.online < /app/schema/catalogue.js
       
   - name: restart catalogue
     ansible.builtin.service:
