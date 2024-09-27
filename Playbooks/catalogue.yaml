@@ -76,7 +76,7 @@
 
   - name: Install dependencies
     ansible.builtin.command: mongo --host mongodb.hetvik.online
-     </app/schema/catalogue.js
+     < /app/schema/catalogue.js
   
   - name: restart catalogue
     ansible.builtin.service:
