@@ -1,0 +1,97 @@
+- name: setup npm source
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+- name: install nodejs
+  ansible.builtin.import_role:
+     name: common
+     tasks_from: nodejs 
+
+- name: app-setup
+  ansible.builtin.import_role:
+   name: common
+   tasks_from: app-setup
+# - name: install nodejs
+#   ansible.builtin.yum:
+#      name: nodejs
+#      state: installed
+
+
+# - name: check roboshop user exists
+#   ansible.builtin.command: id roboshop
+#     register: out
+#     ignore_errors: true
+
+# - name: print the command output
+#   ansible.builtin.debug:
+#      msg: "output is: {{out}}"
+
+# - when: out.rc != 0
+#   name: create user roboshop
+#   ansible.builtin.user:
+#      name: roboshop
+
+# - name: check whether the  /app directory exists or not
+#   ansible.builtin.stat:
+#      path: /app
+#   register: directory
+
+# - name: print the directory status
+#   ansible.builtin.debug:
+#       msg: "stats are: {{directory}}"
+      
+# - when: directory.stat.exists == False
+#   name: create directory
+#   ansible.builtin.file:
+#      path: /app
+#      state: directory
+  
+# - name: download catalogue artifact
+#   ansible.builtin.get_url:
+#      url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+#      dest: /tmp
+
+# - name: extract cataloague
+#   ansible.builtin.unarchive:
+#      src: /tmp/catalogue.zip
+#      dest: /app
+#      remote_src: yes
+
+- name: install dependencies
+  ansible.builtin.command: npm install
+    args:
+     chdir: /app
+
+- name: copy service
+  ansible.builtin.copy:
+     src: catalogue.service
+     dest: /etc/systemd/system/catalogue.service
+  
+- name: daemon reload
+  ansible.builtin.systemd:
+     daemon_reload: true
+     name: catalogue
+
+- name: copy mongod repo to yum.repos.d
+  ansible.builtin.copy:
+     src: mongodb.repo
+     dest: /etc/yum.repos.d/mongodb.repo
+
+- name: Install mongodb-org
+  ansible.builtin.yum:
+     name: mongodb-org-shell
+     state: installed
+
+- name: load MongoDB schema
+  ansible.builtin.shell: mongo --host mongodb.hetvik.online < /app/schema/catalogue.js
+    args:
+     executable: /bin/bash  # Ensures correct execution in shell
+
+  # - name: Install dependencies
+  #   ansible.builtin.command: mongo --host mongodb.hetvik.online < /app/schema/catalogue.js
+      
+- name: restart catalogue
+  ansible.builtin.service:
+     name: catalogue
+     state: restarted
+     enabled: true
+    

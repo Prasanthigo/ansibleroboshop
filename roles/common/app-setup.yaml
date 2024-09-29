@@ -1,0 +1,39 @@
+- name: check roboshop user exists
+  ansible.builtin.command: id roboshop
+    register: out
+    ignore_errors: true
+
+- name: print the command output
+  ansible.builtin.debug:
+     msg: "output is: {{out}}"
+
+- when: out.rc != 0
+  name: create user roboshop
+  ansible.builtin.user:
+     name: roboshop
+
+- name: check whether the  /app directory exists or not
+  ansible.builtin.stat:
+     path: /app
+  register: directory
+
+- name: print the directory status
+  ansible.builtin.debug:
+      msg: "stats are: {{directory}}"
+      
+- when: directory.stat.exists == False
+  name: create directory
+  ansible.builtin.file:
+     path: /app
+     state: directory
+
+- name: "download {{component}} artifact"
+  ansible.builtin.get_url:
+     url: "https://roboshop-builds.s3.amazonaws.com/{{component}}.zip"
+     dest: /tmp
+
+- name: extract {{component}}
+  ansible.builtin.unarchive:
+     src: /tmp/{{component}}.zip
+     dest: /app
+     remote_src: yes
