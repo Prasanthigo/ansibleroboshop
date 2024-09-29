@@ -56,42 +56,42 @@
 #      dest: /app
 #      remote_src: yes
 
-- name: install dependencies
-  ansible.builtin.command: npm install
-    args:
-     chdir: /app
+# - name: install dependencies
+#   ansible.builtin.command: npm install
+#     args:
+#      chdir: /app
 
-- name: copy service
-  ansible.builtin.copy:
-     src: catalogue.service
-     dest: /etc/systemd/system/catalogue.service
+# - name: copy service
+#   ansible.builtin.copy:
+#      src: catalogue.service
+#      dest: /etc/systemd/system/catalogue.service
   
-- name: daemon reload
-  ansible.builtin.systemd:
-     daemon_reload: true
-     name: catalogue
+# - name: daemon reload
+#   ansible.builtin.systemd:
+#      daemon_reload: true
+#      name: catalogue
 
-- name: copy mongod repo to yum.repos.d
-  ansible.builtin.copy:
-     src: mongodb.repo
-     dest: /etc/yum.repos.d/mongodb.repo
+# - name: copy mongod repo to yum.repos.d
+#   ansible.builtin.copy:
+#      src: mongodb.repo
+#      dest: /etc/yum.repos.d/mongodb.repo
 
-- name: Install mongodb-org
-  ansible.builtin.yum:
-     name: mongodb-org-shell
-     state: installed
+# - name: Install mongodb-org
+#   ansible.builtin.yum:
+#      name: mongodb-org-shell
+#      state: installed
 
-- name: load MongoDB schema
-  ansible.builtin.shell: mongo --host mongodb.hetvik.online < /app/schema/catalogue.js
-    args:
-     executable: /bin/bash  # Ensures correct execution in shell
+# - name: load MongoDB schema
+#   ansible.builtin.shell: mongo --host mongodb.hetvik.online < /app/schema/catalogue.js
+#     args:
+#      executable: /bin/bash  # Ensures correct execution in shell
 
-  # - name: Install dependencies
-  #   ansible.builtin.command: mongo --host mongodb.hetvik.online < /app/schema/catalogue.js
+#   # - name: Install dependencies
+#   #   ansible.builtin.command: mongo --host mongodb.hetvik.online < /app/schema/catalogue.js
       
-- name: restart catalogue
-  ansible.builtin.service:
-     name: catalogue
-     state: restarted
-     enabled: true
+# - name: restart catalogue
+#   ansible.builtin.service:
+#      name: catalogue
+#      state: restarted
+#      enabled: true
     
