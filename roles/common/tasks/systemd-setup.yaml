@@ -1,7 +1,7 @@
 - name: copy service
-    ansible.builtin.copy:
-     src: "{{component}}.service"
-     dest: "/etc/systemd/system/{{component}}.service"
+  ansible.builtin.copy:
+    src: "{{component}}.service"
+    dest: "/etc/systemd/system/{{component}}.service"
      
   
 - name: daemon reload
