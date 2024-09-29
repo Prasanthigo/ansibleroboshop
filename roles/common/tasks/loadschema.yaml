@@ -1,0 +1,14 @@
+- name: copy mongod repo to yum.repos.d
+  ansible.builtin.copy:
+     src: mongodb.repo
+     dest: /etc/yum.repos.d/mongodb.repo
+
+- name: Install mongodb-org
+  ansible.builtin.yum:
+     name: mongodb-org-shell
+     state: installed
+
+- name: "load {{component}} schema"
+  ansible.builtin.shell: "mongo --host mongodb.hetvik.online < /app/schema/{{component}}.js"
+  args:
+    executable: /bin/bash  # Ensures correct execution in shell
